@@ -15,8 +15,3 @@ export default class Ship {
     return this.#length === this.#hitCount;
   }
 }
-
-// Your ‘ships’ will be objects that include:
-// their length,
-// the number of times they’ve been hit and
-// whether or not they’ve been sunk.
