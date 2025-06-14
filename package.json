@@ -18,6 +18,7 @@
     "webpack-dev-server": "^5.2.0"
   },
   "scripts": {
+    "test": "jest",
     "dev": "webpack serve --config webpack.dev.js",
     "sync": "git checkout gh-pages && git merge main --no-edit",
     "build": "webpack --config webpack.prod.js",
