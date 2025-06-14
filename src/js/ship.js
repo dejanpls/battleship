@@ -8,10 +8,14 @@ export default class Ship {
   }
 
   hit() {
-    this.#hitCount++;
+    if (!this.isSunk()) this.#hitCount++;
   }
 
   isSunk() {
     return this.#length === this.#hitCount;
+  }
+
+  getHitCount() {
+    return this.#hitCount;
   }
 }
