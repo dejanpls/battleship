@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+div#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+div#menu-container {
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+}
+
+div#menu {
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div#main-container {
+  flex: 1;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: 1px solid blue;
+}
+
+footer p#footer-text > a {
+  text-decoration: none;
+  color: #000;
+}
