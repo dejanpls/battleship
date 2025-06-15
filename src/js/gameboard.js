@@ -16,7 +16,7 @@ export default class Gameboard {
   }
 
   placeShip(coordinates) {
-    if (this.#shipLengths.length === 0) return;
+    if (this.#shipLengths.length === 0) return false;
 
     const length = this.#shipLengths.shift();
     if (length !== coordinates.length) {
@@ -27,7 +27,7 @@ export default class Gameboard {
 
     for (let i = 0; i < coordinates.length; i++) {
       if (!this.validateCoordinates(coordinates[i])) {
-        throw new Error('Invalid coordinate');
+        throw new Error(`Invalid coordinate: [${coordinates[i]}]`);
       }
 
       const key = coordinates[i].join(',');
@@ -40,14 +40,16 @@ export default class Gameboard {
     }
 
     this.#ships.push(ship);
+    return true;
   }
 
   getShipAt(key) {
-    return this.#takenCoordinates[key];
+    return Boolean(this.#takenCoordinates[key]);
   }
 
   validateCoordinates(coordinates) {
-    if (coordinates[0] < 0 || coordinates[0] > this.#gridSize) return false;
-    if (coordinates[1] < 0 || coordinates[1] > this.#gridSize) return false;
+    if (coordinates[0] < 0 || coordinates[0] >= this.#gridSize) return false;
+    if (coordinates[1] < 0 || coordinates[1] >= this.#gridSize) return false;
+    return true;
   }
 }
