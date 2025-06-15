@@ -1,45 +1,39 @@
 import Ship from './ship';
 
 export default class Gameboard {
-  #shipLengths;
-  #shipCount;
+  #shipSizes;
   #gridSize;
   #takenCoordinates;
   #ships;
+  #attacks;
+  #misses;
 
-  constructor(shipCount = 5, gridSize = 10) {
-    this.#shipCount = shipCount;
+  constructor(gridSize = 10) {
     this.#gridSize = gridSize;
     this.#takenCoordinates = {};
-    this.#shipLengths = [5, 4, 3, 3, 2];
-    this.#ships = [];
+    this.#shipSizes = [5, 4, 3, 3, 2];
+    this.#attacks = new Set();
+    this.#misses = new Set();
   }
 
   placeShip(coordinates) {
-    if (this.#shipLengths.length === 0 && !this.isAligned) return false;
+    if (this.#shipSizes.length === 0 && !this.isAligned) return false;
 
-    const length = this.#shipLengths.shift();
-    if (length !== coordinates.length) {
-      throw new Error('Invalid coordinates length');
-    }
+    const length = this.#shipSizes.shift();
+    if (length !== coordinates.length) return false;
 
     const ship = new Ship(length);
 
     for (let i = 0; i < coordinates.length; i++) {
-      if (!this.validateCoordinates(coordinates[i])) {
-        throw new Error(`Invalid coordinate: [${coordinates[i]}]`);
-      }
+      if (!this.validateCoordinates(coordinates[i])) return false;
 
       const key = coordinates[i].join(',');
 
-      if (this.hasShipAt(key)) {
-        throw new Error('Invalid ship placement');
-      }
+      if (this.hasShipAt(key)) return false;
 
       this.#takenCoordinates[key] = ship;
     }
 
-    this.#ships.push(ship);
     return true;
   }
 
@@ -60,11 +54,28 @@ export default class Gameboard {
     return xAllEqual || yAllEqual;
   }
 
-  receiveAttack(coordinates) {}
-}
+  receiveAttack(key) {
+    const coords = key.split(',');
+    if (!this.validateCoordinates(coords) || this.#attacks.has(key)) {
+      return { result: 'invalid', coordinate: key };
+    }
 
-// Next up:
-// Gameboards should have a receiveAttack function that takes a pair of coordinates,
-// determines whether or not the attack hit a ship and
-// then sends the ‘hit’ function to the correct ship,
-// or records the coordinates of the missed shot.
+    this.#attacks.add(key);
+
+    if (this.hasShipAt(key)) {
+      const ship = this.#takenCoordinates[key];
+      ship.hit();
+      return {
+        result: 'hit',
+        sunk: ship.isSunk(),
+        coordinate: key,
+      };
+    }
+
+    this.#misses.add(key);
+    return {
+      result: 'miss',
+      coordinate: key,
+    };
+  }
+}
