@@ -8,4 +8,12 @@ export default class Player {
     this.#type = type;
     this.#gameboard = new Gameboard();
   }
+
+  get gameboard() {
+    return this.#gameboard;
+  }
+
+  isComputer() {
+    return this.#type === 'computer';
+  }
 }
