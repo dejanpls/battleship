@@ -11,3 +11,7 @@ test('Player type is a computer.', () => {
 test('Player gameboard is instance of Gameboard class.', () => {
   expect(player.gameboard).toBeInstanceOf(Gameboard);
 });
+
+test('Player has not lost yet.', () => {
+  expect(player.hasLost()).toBe(false);
+});
