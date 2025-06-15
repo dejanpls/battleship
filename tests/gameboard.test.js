@@ -70,3 +70,7 @@ test('Ship is missed at position [3, 2]:', () => {
     coordinate: '3,2',
   });
 });
+
+test('Not all ships are sunk', () => {
+  expect(gameboard.allShipsSunk()).toBe(false);
+});
