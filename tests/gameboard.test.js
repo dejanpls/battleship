@@ -1,24 +1,50 @@
 import Gameboard from '../src/js/gameboard';
 
 let gameboard = new Gameboard();
+const horizCoord = [
+  [9, 1],
+  [9, 2],
+  [9, 3],
+  [9, 4],
+  [9, 5],
+];
 
-test('Ship is placed on valid coordinates', () => {
-  const coordinates = [
+const vertCoord = [
+  [1, 4],
+  [2, 4],
+  [3, 4],
+  [4, 4],
+];
+
+test('Ship is placed on valid horizontal coordinates', () => {
+  expect(gameboard.placeShip(horizCoord)).toBe(true);
+});
+
+test('Ship is placed on valid vertical coordinates', () => {
+  expect(gameboard.placeShip(vertCoord)).toBe(true);
+});
+
+test('Ship is on given position: [9, 2]', () => {
+  const position = '9,2';
+  expect(gameboard.getShipAt(position)).toBe(true);
+});
+
+test('Ship is not on given position: [8, 0]', () => {
+  const position = '8,0';
+  expect(gameboard.getShipAt(position)).toBe(false);
+});
+
+test('Ship is aligned:', () => {
+  expect(gameboard.isAligned(horizCoord)).toBe(true);
+});
+
+test('Ship alignment failed:', () => {
+  const invCoord = [
     [9, 1],
-    [9, 2],
+    [4, 2], // invalid
     [9, 3],
     [9, 4],
     [9, 5],
   ];
-  expect(gameboard.placeShip(coordinates)).toBe(true);
-});
-
-test('Ship is on given coordinates: [9, 2]', () => {
-  const coordinates = '9,2';
-  expect(gameboard.getShipAt(coordinates)).toBe(true);
-});
-
-test('Ship is not on given coordinates: [8, 0]', () => {
-  const coordinates = '8,0';
-  expect(gameboard.getShipAt(coordinates)).toBe(false);
+  expect(gameboard.isAligned(invCoord)).toBe(false);
 });
