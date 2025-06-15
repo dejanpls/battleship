@@ -32,7 +32,7 @@ export default class Gameboard {
 
       const key = coordinates[i].join(',');
 
-      if (this.getShipAt(key)) {
+      if (this.hasShipAt(key)) {
         throw new Error('Invalid ship placement');
       }
 
@@ -43,7 +43,7 @@ export default class Gameboard {
     return true;
   }
 
-  getShipAt(key) {
+  hasShipAt(key) {
     return Boolean(this.#takenCoordinates[key]);
   }
 
@@ -59,4 +59,12 @@ export default class Gameboard {
 
     return xAllEqual || yAllEqual;
   }
+
+  receiveAttack(coordinates) {}
 }
+
+// Next up:
+// Gameboards should have a receiveAttack function that takes a pair of coordinates,
+// determines whether or not the attack hit a ship and
+// then sends the ‘hit’ function to the correct ship,
+// or records the coordinates of the missed shot.

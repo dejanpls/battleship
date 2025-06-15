@@ -26,12 +26,12 @@ test('Ship is placed on valid vertical coordinates', () => {
 
 test('Ship is on given position: [9, 2]', () => {
   const position = '9,2';
-  expect(gameboard.getShipAt(position)).toBe(true);
+  expect(gameboard.hasShipAt(position)).toBe(true);
 });
 
 test('Ship is not on given position: [8, 0]', () => {
   const position = '8,0';
-  expect(gameboard.getShipAt(position)).toBe(false);
+  expect(gameboard.hasShipAt(position)).toBe(false);
 });
 
 test('Ship is aligned:', () => {
