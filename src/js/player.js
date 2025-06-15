@@ -16,4 +16,8 @@ export default class Player {
   isComputer() {
     return this.#type === 'computer';
   }
+
+  hasLost() {
+    return this.#gameboard.allShipsSunk();
+  }
 }
