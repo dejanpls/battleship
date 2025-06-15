@@ -48,3 +48,25 @@ test('Ship alignment failed:', () => {
   ];
   expect(gameboard.isAligned(invCoord)).toBe(false);
 });
+
+test('Ship is attacked at [9, 2]:', () => {
+  expect(gameboard.receiveAttack('9,2')).toEqual({
+    coordinate: '9,2',
+    result: 'hit',
+    sunk: false,
+  });
+});
+
+test('Ship is again attacked on same position:', () => {
+  expect(gameboard.receiveAttack('9,2')).toEqual({
+    result: 'invalid',
+    coordinate: '9,2',
+  });
+});
+
+test('Ship is missed at position [3, 2]:', () => {
+  expect(gameboard.receiveAttack('3,2')).toEqual({
+    result: 'miss',
+    coordinate: '3,2',
+  });
+});
