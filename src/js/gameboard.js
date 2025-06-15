@@ -14,6 +14,7 @@ export default class Gameboard {
     this.#shipSizes = [5, 4, 3, 3, 2];
     this.#attacks = new Set();
     this.#misses = new Set();
+    this.#ships = [];
   }
 
   placeShip(coordinates) {
@@ -34,7 +35,12 @@ export default class Gameboard {
       this.#takenCoordinates[key] = ship;
     }
 
+    this.#ships.push(ship);
     return true;
+  }
+
+  allShipsSunk() {
+    return this.#ships.every((ship) => ship.isSunk());
   }
 
   hasShipAt(key) {
