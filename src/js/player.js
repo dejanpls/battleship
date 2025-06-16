@@ -34,14 +34,11 @@ export default class Player {
 
   generateMove(opponent) {
     while (true) {
-      let x = Math.floor(Math.random * 9);
-      let y = Math.floor(Math.random * 9);
-      let key = [x, y].join(',');
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const key = [x, y].join(',');
 
-      if (
-        opponent.gameboard.hasShipAt(key) &&
-        opponent.gameboard.alreadyAttacked(key)
-      ) {
+      if (!opponent.gameboard.alreadyAttacked(key)) {
         return key;
       }
     }
