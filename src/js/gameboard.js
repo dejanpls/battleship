@@ -60,6 +60,10 @@ export default class Gameboard {
     return xAllEqual || yAllEqual;
   }
 
+  alreadyAttacked(key) {
+    return this.#attacks.has(key);
+  }
+
   receiveAttack(key) {
     const coords = key.split(',');
     if (!this.validateCoordinates(coords) || this.#attacks.has(key)) {
