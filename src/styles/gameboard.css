@@ -1,0 +1,16 @@
+div#main {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+div[id*='Board'] {
+  display: flex;
+}
+
+div[id*='Board'] div[id^='row-'] > * {
+  width: 40px;
+  height: 40px;
+  border: 1px solid red;
+}
