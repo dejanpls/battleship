@@ -74,3 +74,11 @@ test('Ship is missed at position [3, 2]:', () => {
 test('Not all ships are sunk', () => {
   expect(gameboard.allShipsSunk()).toBe(false);
 });
+
+test('Coordinate [1, 1] was never attacked', () => {
+  expect(gameboard.alreadyAttacked('1,1')).toBe(false);
+});
+
+test('Coordinate [9, 2] was attacked', () => {
+  expect(gameboard.alreadyAttacked('9,2')).toBe(true);
+});
