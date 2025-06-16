@@ -20,4 +20,15 @@ export default class Player {
   hasLost() {
     return this.#gameboard.allShipsSunk();
   }
+
+  makeMove(opponent, coordinate) {
+    const target = this.isComputer() ? generateMove(opponent) : coordinate;
+    const move = opponent.gameboard.receiveAttack(target);
+
+    return {
+      coordinate: move.coordinate,
+      result: move.result,
+      sunk: move.sunk ? move.sunk : false,
+    };
+  }
 }
