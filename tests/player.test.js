@@ -1,5 +1,5 @@
 import Gameboard from '../src/js/gameboard';
-import Player from '../src/js/player';
+import Player from '../src/js/core/player';
 
 let player = new Player('person');
 let computer = new Player('computer');
