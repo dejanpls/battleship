@@ -15,3 +15,11 @@ test('Player gameboard is instance of Gameboard class.', () => {
 test('Player has not lost yet.', () => {
   expect(player.hasLost()).toBe(false);
 });
+
+test('Player misses. No ships set on the field by opponent.', () => {
+  expect(player.makeMove(computer, '9,2')).toEqual({
+    coordinate: '9,2',
+    result: 'miss',
+    sunk: false,
+  });
+});
