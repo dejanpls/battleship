@@ -1,5 +1,5 @@
 import Player from './core/player';
-import GameboardUI from './ui/UIboard';
+import GameboardUI from './ui/gameboardUI';
 
 export default class App {
   static init() {
