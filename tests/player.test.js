@@ -21,7 +21,7 @@ test('Player misses. No ships set on the field by opponent.', () => {
 });
 
 test('Computer generates valid random coordinate.', () => {
-  const coordinate = computer.generateMove();
-  expect(coordinate[0]).toBeGreaterThan(-1).toBeLessThan(10);
-  expect(coordinate[2]).toBeGreaterThan(-1).toBeLessThan(10);
+  const coordinate = computer.generateMove(player).split(',');
+  expect(parseInt(coordinate[0])).toBeGreaterThan(-1);
+  expect(parseInt(coordinate[1])).toBeLessThan(10);
 });
