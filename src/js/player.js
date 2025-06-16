@@ -31,4 +31,19 @@ export default class Player {
       sunk: move.sunk ? move.sunk : false,
     };
   }
+
+  generateMove(opponent) {
+    while (true) {
+      let x = Math.floor(Math.random * 9);
+      let y = Math.floor(Math.random * 9);
+      let key = [x, y].join(',');
+
+      if (
+        opponent.gameboard.hasShipAt(key) &&
+        opponent.gameboard.alreadyAttacked(key)
+      ) {
+        return key;
+      }
+    }
+  }
 }
