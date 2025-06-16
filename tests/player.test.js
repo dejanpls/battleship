@@ -12,6 +12,16 @@ test('Player gameboard is instance of Gameboard class.', () => {
   expect(player.gameboard).toBeInstanceOf(Gameboard);
 });
 
-test('Player has not lost yet.', () => {
-  expect(player.hasLost()).toBe(false);
+test('Player misses. No ships set on the field by opponent.', () => {
+  expect(player.makeMove(computer, '9,2')).toEqual({
+    coordinate: '9,2',
+    result: 'miss',
+    sunk: false,
+  });
+});
+
+test('Computer generates valid random coordinate.', () => {
+  const coordinate = computer.generateMove();
+  expect(coordinate[0]).toBeGreaterThan(-1).toBeLessThan(10);
+  expect(coordinate[2]).toBeGreaterThan(-1).toBeLessThan(10);
 });
