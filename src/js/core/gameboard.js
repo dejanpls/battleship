@@ -26,17 +26,27 @@ export default class Gameboard {
     const ship = new Ship(length);
 
     for (let i = 0; i < coordinates.length; i++) {
-      if (!this.validateCoordinates(coordinates[i])) return false;
+      if (!this.validateCoordinates(coordinates[i])) {
+        this.#shipSizes.unshift(length);
+        return false;
+      }
 
       const key = coordinates[i].join(',');
 
-      if (this.hasShipAt(key)) return false;
+      if (this.hasShipAt(key)) {
+        this.#shipSizes.unshift(length);
+        return false;
+      }
 
       this.#takenCoordinates[key] = ship;
     }
 
     this.#ships.push(ship);
     return true;
+  }
+
+  nextShipSize() {
+    return this.#shipSizes[0];
   }
 
   allShipsSunk() {
