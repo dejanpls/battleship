@@ -40,7 +40,15 @@ export default class GameboardUI {
       }
 
       player.gameboard.placeShip(coords);
-      shipLength = player.gameboard.nextShipSize(); // get next ship to place
+      shipLength = player.gameboard.nextShipSize();
+
+      if (!shipLength) {
+        gameboard.classList.add('disabled');
+        gameboard.style.pointerEvents = 'none';
+
+        console.log('All ships placed! Ready to start game.');
+        // Call next game phase here (for tomorrow!!)
+      }
     });
 
     gameboard.addEventListener('mouseover', (event) => {
