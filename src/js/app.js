@@ -7,5 +7,6 @@ export default class App {
     const computer = new Player('computer');
     GameboardUI.generate(person);
     GameboardUI.generate(computer);
+    GameboardUI.placeShip(person);
   }
 }
