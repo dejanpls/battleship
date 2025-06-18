@@ -40,6 +40,7 @@ export default class GameboardUI {
         if (!shipLength) {
           gameboard.classList.add('disabled');
           gameboard.style.pointerEvents = 'none';
+          rotateBtn.style.pointerEvents = 'none';
 
           console.log('All ships placed! Ready to start game.');
           // Call next game phase here (for tomorrow!!)
