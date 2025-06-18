@@ -59,19 +59,7 @@ export default class GameboardUI {
         .querySelectorAll('.cell.preview')
         .forEach((cell) => cell.classList.remove('preview'));
 
-      const x = parseInt(event.target.dataset.x);
-      const y = parseInt(event.target.dataset.y);
-      if (isNaN(x) || isNaN(y)) return;
-
-      const coords = this.generateCoordinates(player, [x, y], shipLength);
-      if (!coords) return;
-
-      for (const [cx, cy] of coords) {
-        const cell = gameboard.querySelector(
-          `.cell[data-x="${cx}"][data-y="${cy}"]`
-        );
-        if (cell) cell.classList.add('preview');
-      }
+      this.highlightCell(event, gameboard, player, 'preview', shipLength);
     });
   }
 
@@ -87,5 +75,21 @@ export default class GameboardUI {
       coordinates.push(position);
     }
     return coordinates;
+  }
+
+  static highlightCell(event, gameboard, player, className, shipLength) {
+    const x = parseInt(event.target.dataset.x);
+    const y = parseInt(event.target.dataset.y);
+    if (isNaN(x) || isNaN(y)) return;
+
+    const coords = this.generateCoordinates(player, [x, y], shipLength);
+    if (!coords) return;
+
+    for (const [cx, cy] of coords) {
+      const cell = gameboard.querySelector(
+        `.cell[data-x="${cx}"][data-y="${cy}"]`
+      );
+      if (cell) cell.classList.add(className);
+    }
   }
 }
