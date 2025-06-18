@@ -24,20 +24,8 @@ export default class GameboardUI {
     let shipLength = player.gameboard.nextShipSize();
 
     gameboard.addEventListener('mouseup', (event) => {
-      const x = parseInt(event.target.dataset.x);
-      const y = parseInt(event.target.dataset.y);
-      if (isNaN(x) || isNaN(y)) return;
-
-      const coords = this.generateCoordinates(player, [x, y], shipLength);
-      if (!coords) return;
-
-      // Visually mark ship on the board
-      for (const [cx, cy] of coords) {
-        const cell = gameboard.querySelector(
-          `.cell[data-x="${cx}"][data-y="${cy}"]`
-        );
-        if (cell) cell.classList.add('ship');
-      }
+      const coords = this.getCoordsFromEvent(event, player, shipLength);
+      this.highlightCell(coords, gameboard, 'ship');
 
       player.gameboard.placeShip(coords);
       shipLength = player.gameboard.nextShipSize();
@@ -59,7 +47,8 @@ export default class GameboardUI {
         .querySelectorAll('.cell.preview')
         .forEach((cell) => cell.classList.remove('preview'));
 
-      this.highlightCell(event, gameboard, player, 'preview', shipLength);
+      const coords = this.getCoordsFromEvent(event, player, shipLength);
+      this.highlightCell(coords, gameboard, 'preview');
     });
   }
 
@@ -77,19 +66,21 @@ export default class GameboardUI {
     return coordinates;
   }
 
-  static highlightCell(event, gameboard, player, className, shipLength) {
-    const x = parseInt(event.target.dataset.x);
-    const y = parseInt(event.target.dataset.y);
-    if (isNaN(x) || isNaN(y)) return;
-
-    const coords = this.generateCoordinates(player, [x, y], shipLength);
+  static highlightCell(coords, gameboard, className) {
     if (!coords) return;
-
     for (const [cx, cy] of coords) {
       const cell = gameboard.querySelector(
         `.cell[data-x="${cx}"][data-y="${cy}"]`
       );
       if (cell) cell.classList.add(className);
     }
+  }
+
+  static getCoordsFromEvent(event, player, shipLength) {
+    const x = parseInt(event.target.dataset.x);
+    const y = parseInt(event.target.dataset.y);
+    if (isNaN(x) || isNaN(y)) return;
+
+    return this.generateCoordinates(player, [x, y], shipLength);
   }
 }
