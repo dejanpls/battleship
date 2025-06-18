@@ -20,7 +20,7 @@ export default class GameboardUI {
     }
   }
 
-  static placeShip(player) {
+  static placeShip(player, computer) {
     const type = player.isComputer() ? 'computer' : 'person';
     const gameboard = document.getElementById(`${type}Board`);
     const rotateBtn = document.getElementById('rotateBtn');
@@ -42,8 +42,10 @@ export default class GameboardUI {
           gameboard.style.pointerEvents = 'none';
           rotateBtn.style.pointerEvents = 'none';
 
-          console.log('All ships placed! Ready to start game.');
-          // Call next game phase here (for tomorrow!!)
+          console.log('All ships placed! Generating computer ship positions.');
+
+          // Now generate all of the ships for computer
+          UI.generateComputerPositions(computer);
         }
       }
     });
