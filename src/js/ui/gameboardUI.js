@@ -23,6 +23,10 @@ export default class GameboardUI {
   static placeShip(player) {
     const type = player.isComputer() ? 'computer' : 'person';
     const gameboard = document.getElementById(`${type}Board`);
+    const rotateBtn = document.getElementById('rotateBtn');
+
+    rotateBtn.addEventListener('mouseup', () => UI.setShipDirection(rotateBtn));
+
     let shipLength = player.gameboard.nextShipSize();
 
     gameboard.addEventListener('mouseup', (event) => {
