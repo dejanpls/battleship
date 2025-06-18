@@ -17,6 +17,14 @@ export default class UI {
     return this.#generateCoordinates(player, [x, y], shipLength);
   }
 
+  static setShipDirection(rotateBtn) {
+    if (rotateBtn.getAttribute('data-rotation') === 'horizontal') {
+      rotateBtn.setAttribute('data-rotation', 'vertical');
+    } else {
+      rotateBtn.setAttribute('data-rotation', 'horizontal');
+    }
+  }
+
   static #generateCoordinates(player, [x, y], length) {
     const direction = this.#getShipDirection();
     const coordinates = [];
