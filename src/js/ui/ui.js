@@ -44,4 +44,55 @@ export default class UI {
     const rotateBtn = document.getElementById('rotateBtn');
     return rotateBtn.getAttribute('data-rotation');
   }
+
+  static #generateComputerMove(computer) {
+    while (true) {
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const key = [x, y];
+
+      if (!computer.gameboard.hasShipAt(key.join(','))) {
+        return key;
+      }
+    }
+  }
+
+  static #generateComputerCoord(direction, player, pos, length) {
+    const coordinates = [];
+    const x = pos[0];
+    const y = pos[1];
+    for (let i = 0; i < length; i++) {
+      const position = direction === 'horizontal' ? [x + i, y] : [x, y + i];
+      if (
+        !player.gameboard.validateCoordinates(position) ||
+        player.gameboard.hasShipAt(position.join(','))
+      )
+        return null;
+      coordinates.push(position);
+    }
+    return coordinates;
+  }
+
+  static generateComputerPositions(computer) {
+    const gameboard = document.getElementById(`computerBoard`);
+
+    let shipLength = computer.gameboard.nextShipSize();
+
+    while (shipLength) {
+      const position = this.#generateComputerMove(computer);
+      const dir = ['horizontal', 'vertical'][Math.floor(Math.random() * 2)];
+      const coords = this.#generateComputerCoord(
+        dir,
+        computer,
+        position,
+        shipLength
+      );
+      this.highlightCell(coords, gameboard, 'ship');
+
+      if (coords) {
+        computer.gameboard.placeShip(coords);
+        shipLength = computer.gameboard.nextShipSize();
+      }
+    }
+  }
 }
