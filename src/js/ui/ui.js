@@ -17,15 +17,11 @@ export default class UI {
     return this.#generateCoordinates(player, [x, y], shipLength);
   }
 
-  static #generateCoordinates(
-    player,
-    [x, y],
-    length,
-    direction = 'horizontal'
-  ) {
+  static #generateCoordinates(player, [x, y], length) {
+    const direction = this.#getShipDirection();
     const coordinates = [];
     for (let i = 0; i < length; i++) {
-      const position = direction === 'horizontal' ? [x + i, y] : [x, y + 1];
+      const position = direction === 'horizontal' ? [x + i, y] : [x, y + i];
       if (
         !player.gameboard.validateCoordinates(position) ||
         player.gameboard.hasShipAt(position.join(','))
@@ -34,5 +30,10 @@ export default class UI {
       coordinates.push(position);
     }
     return coordinates;
+  }
+
+  static #getShipDirection() {
+    const rotateBtn = document.getElementById('rotateBtn');
+    return rotateBtn.getAttribute('data-rotation');
   }
 }
