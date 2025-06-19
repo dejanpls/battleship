@@ -93,16 +93,12 @@ export default class GameboardUI {
       pause = true;
 
       setTimeout(() => {
-        pause = false;
         UI.updateGameInfo('Computer is about to attack!');
       }, 1500);
 
       const computerResult = computer.makeMove(player);
 
-      pause = true;
-
       setTimeout(() => {
-        pause = false;
         UI.updateGameInfo(
           `${computerResult.result}! Computer attacked ${computerResult.coordinate}`
         );
@@ -112,10 +108,17 @@ export default class GameboardUI {
           'attacked'
         );
       }, 3000);
+
+      setTimeout(() => {
+        pause = false;
+        UI.updateGameInfo("It's time to attack again!");
+      }, 4500);
     });
 
     gameboard.addEventListener('mouseover', (event) => {
       if (!event.target.classList.contains('cell')) return;
+
+      if (pause) return;
 
       // Clear previous preview
       gameboard
