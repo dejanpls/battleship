@@ -66,8 +66,11 @@ export default class GameboardUI {
   }
 
   static startBattle(player, computer) {
+    UI.updateGameInfo("It's time to attack!");
+
     UI.toggleNotifications();
     const gameboard = document.getElementById('computerBoard');
+    const playerboard = document.getElementById('personBoard');
 
     let pause = false;
 
@@ -76,17 +79,51 @@ export default class GameboardUI {
 
       const key = UI.getKeyFromEvent(event);
       const playerResult = player.makeMove(computer, key.join(','));
-      const computerResult = computer.makeMove(player);
 
-      console.log(playerResult);
-      if (player.hasLost()) console.log('Player has lost');
+      UI.highlightTarget(
+        playerResult.coordinate.split(','),
+        gameboard,
+        'attacked'
+      );
+
+      UI.updateGameInfo(
+        `${playerResult.result}! You attacked ${playerResult.coordinate}`
+      );
+
       pause = true;
 
       setTimeout(() => {
         pause = false;
-        console.log(computerResult);
+        UI.updateGameInfo('Computer is about to attack!');
       }, 1500);
-      if (computer.hasLost()) console.log('Computer has lost');
+
+      const computerResult = computer.makeMove(player);
+
+      pause = true;
+
+      setTimeout(() => {
+        pause = false;
+        UI.updateGameInfo(
+          `${computerResult.result}! Computer attacked ${computerResult.coordinate}`
+        );
+        UI.highlightTarget(
+          computerResult.coordinate.split(','),
+          playerboard,
+          'attacked'
+        );
+      }, 3000);
+    });
+
+    gameboard.addEventListener('mouseover', (event) => {
+      if (!event.target.classList.contains('cell')) return;
+
+      // Clear previous preview
+      gameboard
+        .querySelectorAll('.cell.preview')
+        .forEach((cell) => cell.classList.remove('preview'));
+
+      const coords = UI.getKeyFromEvent(event, computer);
+      UI.highlightTarget(coords, gameboard, 'preview');
     });
   }
 }
