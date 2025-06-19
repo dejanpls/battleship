@@ -32,7 +32,8 @@ export default class UI {
       const position = direction === 'horizontal' ? [x + i, y] : [x, y + i];
       if (
         !player.gameboard.validateCoordinates(position) ||
-        player.gameboard.hasShipAt(position.join(','))
+        player.gameboard.hasShipAt(position.join(',')) ||
+        player.gameboard.hasAdjacentShip(position)
       )
         return null;
       coordinates.push(position);
@@ -65,7 +66,8 @@ export default class UI {
       const position = direction === 'horizontal' ? [x + i, y] : [x, y + i];
       if (
         !player.gameboard.validateCoordinates(position) ||
-        player.gameboard.hasShipAt(position.join(','))
+        player.gameboard.hasShipAt(position.join(',')) ||
+        player.gameboard.hasAdjacentShip(position)
       )
         return null;
       coordinates.push(position);
