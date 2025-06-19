@@ -57,6 +57,34 @@ export default class Gameboard {
     return Boolean(this.#takenCoordinates[key]);
   }
 
+  hasAdjacentShip([x, y]) {
+    const directions = [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, -1],
+      [0, 1],
+      [1, -1],
+      [1, 0],
+      [1, 1],
+    ];
+
+    for (const [dx, dy] of directions) {
+      const nx = x + dx;
+      const ny = y + dy;
+
+      // Skip out-of-bounds neighbors
+      if (!this.validateCoordinates([nx, ny])) continue;
+
+      const key = `${nx},${ny}`;
+      if (this.hasShipAt(key)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   validateCoordinates(coordinates) {
     if (coordinates[0] < 0 || coordinates[0] >= this.#gridSize) return false;
     if (coordinates[1] < 0 || coordinates[1] >= this.#gridSize) return false;
