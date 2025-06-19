@@ -10,11 +10,9 @@ export default class UI {
   }
 
   static getCoordsFromEvent(event, player, shipLength) {
-    const x = parseInt(event.target.dataset.x);
-    const y = parseInt(event.target.dataset.y);
-    if (isNaN(x) || isNaN(y)) return;
+    const key = this.getKeyFromEvent(event);
 
-    return this.#generateCoordinates(player, [x, y], shipLength);
+    return this.#generateCoordinates(player, key, shipLength);
   }
 
   static setShipDirection(rotateBtn) {
@@ -23,6 +21,13 @@ export default class UI {
     } else {
       rotateBtn.setAttribute('data-rotation', 'horizontal');
     }
+  }
+
+  static getKeyFromEvent(event) {
+    const x = parseInt(event.target.dataset.x);
+    const y = parseInt(event.target.dataset.y);
+    if (isNaN(x) || isNaN(y)) return;
+    return [x, y];
   }
 
   static #generateCoordinates(player, [x, y], length) {
@@ -94,7 +99,21 @@ export default class UI {
       if (coords) {
         computer.gameboard.placeShip(coords);
         shipLength = computer.gameboard.nextShipSize();
+
+        if (!shipLength) {
+          console.log('Generated all computer ship positions.');
+        }
       }
     }
+  }
+
+  static toggleNotifications() {
+    const notificationBoard = document.getElementById('notificationContainer');
+    const rotateBtn = document.getElementById('rotateBtn');
+
+    notificationBoard.classList.toggle('hidden');
+
+    if (!notificationBoard.classList.contains('hidden'))
+      rotateBtn.classList.add('hidden');
   }
 }
