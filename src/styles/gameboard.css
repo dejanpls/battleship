@@ -27,7 +27,12 @@ div[id*='Board'] div > * {
 #computerBoard.disabled {
   opacity: 0.5;
   pointer-events: none;
-  filter: grayscale(1);
+  filter: grayscale(0.5);
+}
+
+.cell.attacked,
+.cell.attacked {
+  background-color: brown;
 }
 
 #rotateBtn.hidden {
