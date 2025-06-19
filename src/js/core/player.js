@@ -22,7 +22,7 @@ export default class Player {
   }
 
   makeMove(opponent, coordinate) {
-    const target = this.isComputer() ? generateMove(opponent) : coordinate;
+    const target = this.isComputer() ? this.generateMove(opponent) : coordinate;
     const move = opponent.gameboard.receiveAttack(target);
 
     return {
