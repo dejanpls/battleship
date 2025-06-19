@@ -1,3 +1,4 @@
+import Game from './game';
 import UI from './ui';
 
 export default class GameboardUI {
@@ -46,6 +47,7 @@ export default class GameboardUI {
 
           // Now generate all of the ships for computer
           UI.generateComputerPositions(computer);
+          this.startBattle(player, computer);
         }
       }
     });
@@ -60,6 +62,31 @@ export default class GameboardUI {
 
       const coords = UI.getCoordsFromEvent(event, player, shipLength);
       UI.highlightCell(coords, gameboard, 'preview');
+    });
+  }
+
+  static startBattle(player, computer) {
+    UI.toggleNotifications();
+    const gameboard = document.getElementById('computerBoard');
+
+    let pause = false;
+
+    gameboard.addEventListener('mouseup', (event) => {
+      if (pause) return;
+
+      const key = UI.getKeyFromEvent(event);
+      const playerResult = player.makeMove(computer, key.join(','));
+      const computerResult = computer.makeMove(player);
+
+      console.log(playerResult);
+      if (player.hasLost()) console.log('Player has lost');
+      pause = true;
+
+      setTimeout(() => {
+        pause = false;
+        console.log(computerResult);
+      }, 1500);
+      if (computer.hasLost()) console.log('Computer has lost');
     });
   }
 }
