@@ -66,9 +66,9 @@ export default class GameboardUI {
   }
 
   static startBattle(player, computer) {
+    UI.hideRotateBtn();
     UI.updateGameInfo("It's time to attack!");
 
-    UI.toggleNotifications();
     const gameboard = document.getElementById('computerBoard');
     const playerboard = document.getElementById('personBoard');
 

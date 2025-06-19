@@ -9,6 +9,5 @@ export default class Game {
     GameboardUI.generate(person);
     GameboardUI.generate(computer);
     GameboardUI.placeShip(person, computer);
-    UI.toggleNotifications();
   }
 }

@@ -116,15 +116,10 @@ export default class UI {
     }
   }
 
-  static toggleNotifications() {
-    const notificationBoard = document.getElementById('notificationContainer');
+  static hideRotateBtn() {
     const rotateBtn = document.getElementById('rotateBtn');
 
-    notificationBoard.classList.toggle('hidden');
-
-    if (!notificationBoard.classList.contains('hidden')) {
-      rotateBtn.classList.add('hidden');
-    }
+    rotateBtn.classList.add('hidden');
   }
 
   static updateGameInfo(message) {
