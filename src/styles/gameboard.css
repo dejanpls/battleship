@@ -29,3 +29,7 @@ div[id*='Board'] div > * {
   pointer-events: none;
   filter: grayscale(1);
 }
+
+#rotateBtn.hidden {
+  display: none;
+}
