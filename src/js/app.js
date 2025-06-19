@@ -1,12 +1,7 @@
-import Player from './core/player';
-import GameboardUI from './ui/gameboardUI';
+import Game from './ui/game';
 
 export default class App {
   static init() {
-    const person = new Player('person');
-    const computer = new Player('computer');
-    GameboardUI.generate(person);
-    GameboardUI.generate(computer);
-    GameboardUI.placeShip(person, computer);
+    Game.start();
   }
 }
