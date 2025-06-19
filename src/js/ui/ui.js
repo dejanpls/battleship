@@ -9,6 +9,15 @@ export default class UI {
     }
   }
 
+  static highlightTarget([cx, cy], gameboard, className) {
+    if (![cx, cy]) return;
+
+    const cell = gameboard.querySelector(
+      `.cell[data-x="${cx}"][data-y="${cy}"]`
+    );
+    if (cell) cell.classList.add(className);
+  }
+
   static getCoordsFromEvent(event, player, shipLength) {
     const key = this.getKeyFromEvent(event);
 
@@ -113,7 +122,12 @@ export default class UI {
 
     notificationBoard.classList.toggle('hidden');
 
-    if (!notificationBoard.classList.contains('hidden'))
+    if (!notificationBoard.classList.contains('hidden')) {
       rotateBtn.classList.add('hidden');
+    }
+  }
+
+  static updateGameInfo(message) {
+    document.getElementById('gameInfo').textContent = message;
   }
 }
