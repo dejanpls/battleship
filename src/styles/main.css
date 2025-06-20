@@ -12,10 +12,10 @@ div#wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #edf2f4;
 }
 
 div#menu-container {
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   height: 70px;
@@ -34,7 +34,25 @@ div#menu #logo {
 }
 
 div#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
   flex: 1;
+}
+
+div#controls {
+  position: relative;
+}
+
+#rotateBtn {
+  position: fixed;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  left: 50%;
+  transform: translate(-50%, -40%);
 }
 
 footer {
@@ -42,7 +60,6 @@ footer {
   justify-content: center;
   align-items: center;
   height: 40px;
-  border: 1px solid blue;
 }
 
 footer p#footer-text > a {
