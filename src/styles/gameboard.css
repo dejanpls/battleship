@@ -17,6 +17,7 @@ div[id*='Board'] div > * {
 
 .cell.preview {
   background-color: rgba(0, 255, 0, 0.4); /* green ghost for valid placement */
+  cursor: pointer;
 }
 
 .cell.ship {
@@ -30,9 +31,14 @@ div[id*='Board'] div > * {
   filter: grayscale(0.5);
 }
 
-.cell.attacked,
-.cell.attacked {
+.cell.miss,
+.cell.miss {
   background-color: brown;
+}
+
+.cell.hit,
+.cell.hit {
+  background-color: rgb(46, 98, 175);
 }
 
 #rotateBtn.hidden {
