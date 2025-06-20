@@ -7,21 +7,23 @@ div#main {
 
 div[id*='Board'] {
   display: flex;
+  border: 3px solid #3c6e71;
+  background-color: #7198c0;
 }
 
 div[id*='Board'] div > * {
   width: 40px;
   height: 40px;
-  border: 1px solid red;
+  border: 1px solid #79a6d3;
 }
 
 .cell.preview {
-  background-color: rgba(0, 255, 0, 0.4); /* green ghost for valid placement */
+  background-color: #ced4da; /* green ghost for valid placement */
   cursor: pointer;
 }
 
 .cell.ship {
-  background-color: darkgreen;
+  background-color: #13729e;
 }
 
 #personBoard.disabled,
@@ -33,12 +35,12 @@ div[id*='Board'] div > * {
 
 .cell.miss,
 .cell.miss {
-  background-color: brown;
+  background-color: #ff150d;
 }
 
 .cell.hit,
 .cell.hit {
-  background-color: rgb(46, 98, 175);
+  background-color: #a3df18;
 }
 
 #rotateBtn.hidden {
