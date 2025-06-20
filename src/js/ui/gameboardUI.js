@@ -72,53 +72,64 @@ export default class GameboardUI {
     const gameboard = document.getElementById('computerBoard');
     const playerboard = document.getElementById('personBoard');
 
-    let pause = false;
+    let active = true;
 
     gameboard.addEventListener('mouseup', (event) => {
-      if (pause) return;
+      if (!active) return;
 
       const key = UI.getKeyFromEvent(event);
       const playerResult = player.makeMove(computer, key.join(','));
-
-      UI.highlightTarget(
-        playerResult.coordinate.split(','),
-        gameboard,
-        'attacked'
-      );
-
-      UI.updateGameInfo(
-        `${playerResult.result}! You attacked ${playerResult.coordinate}`
-      );
-
-      pause = true;
-
-      setTimeout(() => {
-        UI.updateGameInfo('Computer is about to attack!');
-      }, 1500);
-
       const computerResult = computer.makeMove(player);
 
-      setTimeout(() => {
+      if (player.hasLost()) {
         UI.updateGameInfo(
-          `${computerResult.result}! Computer attacked ${computerResult.coordinate}`
+          `${computerResult.result.toUpperCase()}! Our enemy got the best of us, captain! We've lost.`
         );
+        active = false;
+      } else if (computer.hasLost()) {
+        UI.updateGameInfo(
+          `${playerResult.result.toUpperCase()}! We've destroyed all of the enemies ships!`
+        );
+        active = false;
+      } else {
         UI.highlightTarget(
-          computerResult.coordinate.split(','),
-          playerboard,
-          'attacked'
+          playerResult.coordinate.split(','),
+          gameboard,
+          playerResult.result
         );
-      }, 3000);
 
-      setTimeout(() => {
-        pause = false;
-        UI.updateGameInfo("It's time to attack again!");
-      }, 4500);
+        UI.updateGameInfo(
+          `${playerResult.result.toUpperCase()}! You attacked ${playerResult.coordinate}`
+        );
+
+        active = false;
+
+        setTimeout(() => {
+          UI.updateGameInfo('Behold! Computer is on the attack!');
+        }, 2000);
+
+        setTimeout(() => {
+          UI.updateGameInfo(
+            `${computerResult.result.toUpperCase()}! Computer attacked ${computerResult.coordinate}`
+          );
+          UI.highlightTarget(
+            computerResult.coordinate.split(','),
+            playerboard,
+            computerResult.result
+          );
+        }, 4000);
+
+        setTimeout(() => {
+          UI.updateGameInfo("Let's attack again, captain!");
+          active = true;
+        }, 6000);
+      }
     });
 
     gameboard.addEventListener('mouseover', (event) => {
       if (!event.target.classList.contains('cell')) return;
 
-      if (pause) return;
+      if (!active) return;
 
       // Clear previous preview
       gameboard
