@@ -1,0 +1,128 @@
+div#main {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+div[id*='Board'] {
+  display: flex;
+  border: 3px solid #3c6e71;
+  background-color: #7198c0;
+}
+
+div[id*='Board'] div > * {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #79a6d3;
+}
+
+.cell.preview {
+  background-color: #ced4da; /* green ghost for valid placement */
+  cursor: pointer;
+}
+
+.cell.ship {
+  background-color: #13729e;
+}
+
+.cell.hideShip {
+  background-color: #7198c0;
+}
+
+.cell.targetShip {
+  background-color: #13729e;
+  cursor: pointer;
+}
+
+#personBoard.disabled,
+#computerBoard.disabled {
+  opacity: 1;
+  pointer-events: none;
+  filter: grayscale(0.2);
+}
+
+.cell.miss,
+.cell.miss {
+  background-color: #ff150d;
+}
+
+.cell.hit,
+.cell.hit {
+  background-color: #a3df18;
+}
+
+#rotateBtn.hidden {
+  display: none;
+}
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inconsolata', monospace;
+}
+
+div#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #edf2f4;
+}
+
+div#menu-container {
+  display: flex;
+  justify-content: center;
+  height: 70px;
+}
+
+div#menu {
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#menu #logo {
+  font-size: 36px;
+  font-family: 'Oswald', sans-serif;
+}
+
+div#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex: 1;
+}
+
+div#controls {
+  position: relative;
+}
+
+#rotateBtn {
+  position: fixed;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+footer p#footer-text > a {
+  text-decoration: none;
+  color: #000;
+}
+
+
+/*# sourceMappingURL=main.d5893d2cbcf7ed714805.css.map*/
