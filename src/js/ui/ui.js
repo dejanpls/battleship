@@ -103,7 +103,7 @@ export default class UI {
         position,
         shipLength
       );
-      this.highlightCell(coords, gameboard, 'ship');
+      this.highlightCell(coords, gameboard, 'hideShip');
 
       if (coords) {
         computer.gameboard.placeShip(coords);

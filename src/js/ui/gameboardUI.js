@@ -133,11 +133,11 @@ export default class GameboardUI {
 
       // Clear previous preview
       gameboard
-        .querySelectorAll('.cell.preview')
-        .forEach((cell) => cell.classList.remove('preview'));
+        .querySelectorAll('.cell.targetShip')
+        .forEach((cell) => cell.classList.remove('targetShip'));
 
       const coords = UI.getKeyFromEvent(event, computer);
-      UI.highlightTarget(coords, gameboard, 'preview');
+      UI.highlightTarget(coords, gameboard, 'targetShip');
     });
   }
 }

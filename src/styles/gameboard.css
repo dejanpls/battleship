@@ -26,6 +26,15 @@ div[id*='Board'] div > * {
   background-color: #13729e;
 }
 
+.cell.hideShip {
+  background-color: #7198c0;
+}
+
+.cell.targetShip {
+  background-color: #13729e;
+  cursor: pointer;
+}
+
 #personBoard.disabled,
 #computerBoard.disabled {
   opacity: 1;
