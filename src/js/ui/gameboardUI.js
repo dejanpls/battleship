@@ -81,14 +81,21 @@ export default class GameboardUI {
       const playerResult = player.makeMove(computer, key.join(','));
       const computerResult = computer.makeMove(player);
 
+      const computerMsg = computerResult.sunk
+        ? 'ship is destroyed'.toUpperCase()
+        : computerResult.result.toUpperCase();
+      const playerMsg = playerResult.sunk
+        ? 'ship is destroyed'.toUpperCase()
+        : playerResult.result.toUpperCase();
+
       if (player.hasLost()) {
         UI.updateGameInfo(
-          `${computerResult.result.toUpperCase()}! Our enemy got the best of us, captain! We've lost.`
+          `${computerMsg}! Our enemy got the best of us, captain! We've lost.`
         );
         active = false;
       } else if (computer.hasLost()) {
         UI.updateGameInfo(
-          `${playerResult.result.toUpperCase()}! We've destroyed all of the enemies ships!`
+          `${playerMsg}! We've destroyed all of the enemies ships!`
         );
         active = false;
       } else {
@@ -99,7 +106,7 @@ export default class GameboardUI {
         );
 
         UI.updateGameInfo(
-          `${playerResult.result.toUpperCase()}! You attacked ${playerResult.coordinate}`
+          `${playerMsg}! You attacked ${playerResult.coordinate}`
         );
 
         active = false;
@@ -110,7 +117,7 @@ export default class GameboardUI {
 
         setTimeout(() => {
           UI.updateGameInfo(
-            `${computerResult.result.toUpperCase()}! Computer attacked ${computerResult.coordinate}`
+            `${computerMsg}! Computer attacked ${computerResult.coordinate}`
           );
           UI.highlightTarget(
             computerResult.coordinate.split(','),
