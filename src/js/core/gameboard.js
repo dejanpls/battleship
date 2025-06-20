@@ -11,7 +11,7 @@ export default class Gameboard {
   constructor(gridSize = 10) {
     this.#gridSize = gridSize;
     this.#takenCoordinates = {};
-    this.#shipSizes = [5, 4, 3, 3, 2];
+    this.#shipSizes = [5, 4, 4, 3, 2, 2, 1];
     this.#attacks = new Set();
     this.#misses = new Set();
     this.#ships = [];
